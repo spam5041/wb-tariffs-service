@@ -36,16 +36,13 @@
 
 1. Клонирование репозитория:
 
-bash
-git clone <repository-url>
-cd wb-tariffs-service
+```
+git clone https://github.com/spam5041/wb-tariffs-service
+cd wb-tariffs-service   
+```
 
-2. Создайте файл .env на основе .env.example:
+2. Настройте переменные окружения в .env файле (по завершении удалите .example из имени файла):
 
-bash
-cp .env.example .env
-
-3. Настройте переменные окружения в .env файле:
 - WB_API_KEY - токен API Wildberries
 - GOOGLE_SHEET_IDS - список ID Google таблиц через запятую
 - Другие необходимые переменные
@@ -54,16 +51,17 @@ cp .env.example .env
 
 5. Запуск через Docker:
 
-bash
+```
 docker compose up --build
+```
 
 6. Или локальный запуск:
 
-bash
+```
 npm install
 npm run migrate
 npm start
-
+```
 ## Структура проекта
 
 - /src
@@ -76,29 +74,60 @@ npm start
 ## API и интеграции
 
 ### Wildberries API
-- Endpoint: https://common-api.wildberries.ru/api/v1/tariffs/box
+- Endpoint: `https://common-api.wildberries.ru/api/v1/tariffs/box`
 - Метод: GET
 - Частота запросов: каждый час
 
 ### Google Sheets
-- Данные экспортируются на лист stocks_coefs
+- Данные экспортируются на лист `stocks_coefs`
 - Частота обновления: каждые 2 часа
 - Сортировка по возрастанию коэффициента
+- Поддержка множества таблиц
+
+## База данных
+
+Таблица `warehouse_tariffs`:
+- date (date) - дата получения тарифа
+- warehouse_name (string) - название склада
+- delivery_storage_cost (decimal) - коэффициент доставки и хранения
+- delivery_base (decimal) - базовая стоимость доставки
+- delivery_liter (decimal) - стоимость доставки за литр
+- storage_base (decimal) - базовая стоимость хранения
+- storage_liter (decimal) - стоимость хранения за литр
 
 ## Мониторинг
 
-Логи доступны в файлах:
-- combined.log - все логи
-- error.log - только ошибки
+Логи сохраняются в файлы:
+- `combined.log` - все логи
+- `error.log` - только ошибки
 
 ## Разработка
 
-bash
 Запуск в режиме разработки
-npm run dev
-Запуск тестов
-npm test
-Создание новой миграции
-npm run migrate:make <migration-name>
 
-тот README файл предоставляет всю необходимую информацию для установки и использования сервиса.
+``` 
+npm run dev
+```
+
+Запуск тестов
+
+``` 
+npm test
+```
+Создание новой миграции
+
+``` 
+npm run migrate:make <migration-name>
+```
+
+Применение миграций
+    
+``` 
+npm run migrate
+```
+
+Откат миграций
+
+``` 
+npm run migrate:rollback
+```
