@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+dist/
+
+# Environment and secrets
+.env
+credentials.json
+
+# Logs
+*.log
+combined.log
+error.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

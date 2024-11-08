@@ -1,0 +1,34 @@
+{
+  "name": "wb-tariffs-service",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "start": "npx ts-node src/index.ts",
+    "dev": "npx ts-node src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "test": "npx ts-node src/test.ts",
+    "migrate": "knex migrate:latest --knexfile src/db/knexfile.ts",
+    "migrate:rollback": "knex migrate:rollback --knexfile src/db/knexfile.ts",
+    "migrate:make": "knex migrate:make --knexfile src/db/knexfile.ts"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "googleapis": "^129.0.0",
+    "knex": "^3.1.0",
+    "node-cron": "^3.0.3",
+    "pg": "^8.11.3",
+    "winston": "^3.11.0",
+    "glob": "^10.3.10",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "@types/node-cron": "^3.0.11"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+} 
